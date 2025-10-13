@@ -206,6 +206,77 @@
             color: #155724;
             border-left: 4px solid #28a745;
         }
+
+        /* Trendy Navigation Menu */
+        .features-nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .features-nav h3 {
+            color: #e91e63;
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .nav-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 2px solid transparent;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 105, 135, 0.3);
+            border-color: #ff6b9d;
+        }
+
+        .nav-card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .nav-card-title {
+            font-size: 22px;
+            color: #e91e63;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .nav-card-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .nav-card.coming-soon-card {
+            background: linear-gradient(135deg, #e0e0e0 0%, #d3d3d3 100%);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .nav-card.coming-soon-card:hover {
+            transform: none;
+            border-color: transparent;
+        }
     </style>
 </head>
 <body>
@@ -244,16 +315,50 @@
             </div>
         </div>
 
+        <!-- Trendy Features Navigation -->
+        <div class="features-nav">
+            <h3>🌟 Explore Your Shared Space 🌟</h3>
+            <div class="nav-grid">
+                <!-- Memory Lane - Active Feature -->
+                <a href="{{ route('memory-lane.index') }}" class="nav-card">
+                    <div class="nav-card-icon">📸</div>
+                    <div class="nav-card-title">Memory Lane</div>
+                    <div class="nav-card-description">
+                        Preserve your precious moments together. Upload photos, videos, and stories.
+                    </div>
+                </a>
+
+                <!-- Future Features - Coming Soon -->
+                <div class="nav-card coming-soon-card">
+                    <div class="nav-card-icon">💬</div>
+                    <div class="nav-card-title">Love Chat</div>
+                    <div class="nav-card-description">
+                        Private messaging space. Coming Soon!
+                    </div>
+                </div>
+
+                <div class="nav-card coming-soon-card">
+                    <div class="nav-card-icon">📅</div>
+                    <div class="nav-card-title">Important Dates</div>
+                    <div class="nav-card-description">
+                        Track anniversaries and special moments. Coming Soon!
+                    </div>
+                </div>
+
+                <div class="nav-card coming-soon-card">
+                    <div class="nav-card-icon">🎯</div>
+                    <div class="nav-card-title">Bucket List</div>
+                    <div class="nav-card-description">
+                        Plan your future adventures together. Coming Soon!
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="canvas-content">
             <h3>Your Shared Sacred Space</h3>
             <p>Welcome to your Shared Canvas, a special place created just for you two.</p>
             <p>This is where your love story unfolds, a canvas waiting to be painted with your memories.</p>
-            
-            <div class="coming-soon">
-                <h4>✨ More Magic Coming Soon ✨</h4>
-                <p>We're preparing beautiful features for your canvas...</p>
-                <p>Share memories, create together, and celebrate your eternal bond.</p>
-            </div>
         </div>
     </div>
 </body>

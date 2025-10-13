@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade');
             $table->enum('status', ['pending', 'accepted', 'declined'])->default('pending');
             $table->timestamp('bonded_at')->nullable(); // When the eternal bond was formed
-            $table->timestamps();
             
             // Ensure unique connections between users
             $table->unique(['sender_id', 'receiver_id']);
