@@ -465,16 +465,27 @@
                             
                             @if($review->media_path)
                                 <div class="review-media">
-                                    @if(str_ends_with($review->media_path, ['.jpg', '.jpeg', '.png', '.gif', '.webp']))
-                                        <img src="{{ asset('storage/' . $review->media_path) }}" alt="Review media">
-                                    @elseif(str_ends_with($review->media_path, ['.mp4', '.webm', '.ogg']))
-                                        <video controls>
+                                    @php
+                                        $ext = strtolower(pathinfo($review->media_path, PATHINFO_EXTENSION));
+                                        $imageExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
+                                        $videoExts = ['mp4', 'webm', 'ogg', 'avi', 'mov'];
+                                        $audioExts = ['mp3', 'wav', 'ogg', 'aac', 'm4a'];
+                                    @endphp
+                                    
+                                    @if(in_array($ext, $imageExts))
+                                        <img src="{{ asset('storage/' . $review->media_path) }}" alt="Review media" style="max-width: 100%; border-radius: 8px; margin-top: 10px;">
+                                    @elseif(in_array($ext, $videoExts))
+                                        <video controls style="max-width: 100%; border-radius: 8px; margin-top: 10px;">
                                             <source src="{{ asset('storage/' . $review->media_path) }}">
+                                            Your browser does not support the video tag.
                                         </video>
-                                    @elseif(str_ends_with($review->media_path, ['.mp3', '.wav', '.ogg']))
-                                        <audio controls>
+                                    @elseif(in_array($ext, $audioExts))
+                                        <audio controls style="width: 100%; margin-top: 10px;">
                                             <source src="{{ asset('storage/' . $review->media_path) }}">
+                                            Your browser does not support the audio tag.
                                         </audio>
+                                    @else
+                                        <a href="{{ asset('storage/' . $review->media_path) }}" target="_blank" style="color: #e91e63; text-decoration: underline;">📎 View Attached File</a>
                                     @endif
                                 </div>
                             @endif

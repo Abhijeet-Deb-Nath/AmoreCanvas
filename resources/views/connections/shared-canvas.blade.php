@@ -75,7 +75,7 @@
             gap: 20px;
         }
 
-        .logout-btn {
+        .profile-btn, .logout-btn {
             padding: 10px 25px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -85,11 +85,21 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Georgia', serif;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .logout-btn:hover {
+        .profile-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .profile-btn:hover, .logout-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+
+        .profile-btn:hover {
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
         .container {
@@ -291,6 +301,7 @@
     <div class="navbar">
         <h1>♥ AmoreCanvas</h1>
         <div class="navbar-right">
+            <a href="{{ route('profile.edit') }}" class="profile-btn">✏️ Edit Profile</a>
             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
                 @csrf
                 <button type="submit" class="logout-btn">Logout</button>
@@ -325,6 +336,33 @@
                     <div class="nav-card-title">Memory Lane</div>
                     <div class="nav-card-description">
                         Preserve your precious moments together. Upload photos, videos, and stories.
+                    </div>
+                </a>
+
+                <!-- Shared Dreams - Active Feature -->
+                <a href="{{ route('dreams.index') }}" class="nav-card">
+                    <div class="nav-card-icon">✨</div>
+                    <div class="nav-card-title">Shared Dreams</div>
+                    <div class="nav-card-description">
+                        Create and share dreams you wish to live together. Plan your future moments.
+                    </div>
+                </a>
+
+                <!-- Bucket List - Active Feature -->
+                <a href="{{ route('bucket-list.index') }}" class="nav-card">
+                    <div class="nav-card-icon">📋</div>
+                    <div class="nav-card-title">Bucket List</div>
+                    <div class="nav-card-description">
+                        Dreams with confirmed destiny dates. Your upcoming adventures await!
+                    </div>
+                </a>
+
+                <!-- Lived in the Dream - Active Feature -->
+                <a href="{{ route('dreams.lived') }}" class="nav-card">
+                    <div class="nav-card-icon">🌟</div>
+                    <div class="nav-card-title">Lived in the Dream</div>
+                    <div class="nav-card-description">
+                        Fulfilled dreams that became reality. Celebrate what you've achieved together!
                     </div>
                 </a>
 
