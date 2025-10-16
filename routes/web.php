@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/memory-lane', [MemoryLaneController::class, 'index'])->name('memory-lane.index');
     Route::get('/memory-lane/create', [MemoryLaneController::class, 'create'])->name('memory-lane.create');
     Route::post('/memory-lane', [MemoryLaneController::class, 'store'])->name('memory-lane.store');
+    Route::post('/memory-lane/from-dream/{dreamId}', [MemoryLaneController::class, 'storeFromDream'])->name('memory-lane.store-from-dream');
     Route::get('/memory-lane/{id}', [MemoryLaneController::class, 'show'])->name('memory-lane.show');
     Route::get('/memory-lane/{id}/edit', [MemoryLaneController::class, 'edit'])->name('memory-lane.edit');
     Route::put('/memory-lane/{id}', [MemoryLaneController::class, 'update'])->name('memory-lane.update');

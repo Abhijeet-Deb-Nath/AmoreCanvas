@@ -225,7 +225,23 @@
         }
 
         .file-upload-label input[type="file"] {
-            display: none;
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+        
+        /* Make file input visible and styled */
+        .review-form-footer input[type="file"] {
+            opacity: 1 !important;
+            position: relative !important;
+            pointer-events: all !important;
+            display: block !important;
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed rgba(255, 182, 193, 0.5);
+            border-radius: 8px;
+            background: rgba(255, 107, 157, 0.1);
+            cursor: pointer;
         }
 
         .submit-review-btn {
@@ -526,15 +542,29 @@
 
             <!-- Add Review Form (at the bottom) -->
             <div class="add-review-form">
+                @if (session('review_success'))
+                    <div style="padding: 15px; background: #d4edda; color: #155724; border-radius: 8px; margin-bottom: 15px;">
+                        {{ session('review_success') }}
+                    </div>
+                @endif
+                
+                @if (session('review_error'))
+                    <div style="padding: 15px; background: #f8d7da; color: #721c24; border-radius: 8px; margin-bottom: 15px;">
+                        {{ session('review_error') }}
+                    </div>
+                @endif
+                
                 <form method="POST" action="{{ route('memory-lane.review.store', $memory->id) }}" enctype="multipart/form-data">
                     @csrf
                     <textarea name="review" placeholder="Share your thoughts about this memory..." required>{{ old('review') }}</textarea>
                     
                     <div class="review-form-footer">
-                        <label class="file-upload-label">
-                            📎 Attach Media (Optional)
-                            <input type="file" name="media_file" accept="image/*,video/*,audio/*">
-                        </label>
+                        <div style="flex: 1;">
+                            <label for="review-media-input" style="display: block; font-size: 14px; color: #666; margin-bottom: 5px;">
+                                📎 Attach Media (Optional)
+                            </label>
+                            <input type="file" name="media_file" accept="image/*,video/*,audio/*" id="review-media-input">
+                        </div>
                         <button type="submit" class="submit-review-btn">💕 Add Review</button>
                     </div>
                 </form>
@@ -556,10 +586,36 @@
         // File upload label text update
         document.querySelectorAll('input[type="file"]').forEach(input => {
             input.addEventListener('change', function() {
-                const label = this.parentElement;
                 if (this.files.length > 0) {
-                    label.textContent = '📎 ' + this.files[0].name;
+                    // Find the label for this input
+                    const label = document.querySelector('label[for="' + this.id + '"]');
+                    if (label) {
+                        label.textContent = '📎 ' + this.files[0].name;
+                    }
+                    console.log('File selected:', this.files[0].name, 'Size:', this.files[0].size, 'Type:', this.files[0].type);
+                } else {
+                    console.log('No file selected');
                 }
+            });
+        });
+
+        // Debug: Log form data before submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const formData = new FormData(this);
+                console.log('=== FORM SUBMISSION DEBUG ===');
+                console.log('Form action:', this.action);
+                console.log('Form method:', this.method);
+                console.log('Form enctype:', this.enctype);
+                
+                for (let [key, value] of formData.entries()) {
+                    if (value instanceof File) {
+                        console.log(key + ':', value.name, '(' + value.size + ' bytes)');
+                    } else {
+                        console.log(key + ':', value);
+                    }
+                }
+                console.log('=== END DEBUG ===');
             });
         });
     </script>

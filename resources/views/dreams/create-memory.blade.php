@@ -8,6 +8,9 @@
         .container { max-width: 700px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
         .header { text-align: center; margin-bottom: 35px; }
         .header h1 { color: #764ba2; font-size: 36px; margin-bottom: 10px; }
+        .alert { padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        .alert-error { background: #fee; color: #c00; border: 1px solid #fcc; }
+        .alert-success { background: #efe; color: #070; border: 1px solid #cfc; }
         .dream-summary { background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 30px; border-left: 4px solid #764ba2; }
         .form-group { margin-bottom: 25px; }
         .form-group label { display: block; color: #333; font-weight: bold; margin-bottom: 8px; font-size: 16px; }
@@ -26,6 +29,22 @@
             <h1>💫 Create Memory Lane Entry</h1>
             <p>Transform your fulfilled dream into a lasting memory</p>
         </div>
+
+        @if ($errors->any())
+            <div class="alert alert-error">
+                <ul style="margin: 0; padding-left: 20px;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-error">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="dream-summary">
             <h3 style="color: #764ba2; margin-bottom: 15px;">From Dream: {{ $dream->heading }}</h3>

@@ -7,6 +7,7 @@ use App\Models\MemoryReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class MemoryLaneController extends Controller
 {
@@ -237,7 +238,16 @@ class MemoryLaneController extends Controller
 
         $mediaPath = null;
         if ($request->hasFile('media_file')) {
+            Log::info('Review media file received', [
+                'original_name' => $request->file('media_file')->getClientOriginalName(),
+                'size' => $request->file('media_file')->getSize()
+            ]);
             $mediaPath = $request->file('media_file')->store('reviews', 'public');
+            Log::info('Review media stored', ['path' => $mediaPath]);
+        } else {
+            Log::info('No review media file received', [
+                'all_files' => array_keys($request->allFiles())
+            ]);
         }
 
         MemoryReview::create([
@@ -247,8 +257,12 @@ class MemoryLaneController extends Controller
             'media_path' => $mediaPath,
         ]);
 
+        $successMessage = $mediaPath 
+            ? '💕 Review added successfully with media attachment!' 
+            : '💕 Review added successfully!';
+
         return redirect()->route('memory-lane.show', $memoryId)
-            ->with('success', 'Review added successfully! 💕');
+            ->with('review_success', $successMessage);
     }
 
     /**
@@ -315,5 +329,102 @@ class MemoryLaneController extends Controller
 
         return redirect()->route('memory-lane.show', $memoryId)
             ->with('success', 'Review deleted successfully');
+    }
+
+    /**
+     * Store a new memory created from a fulfilled dream
+     */
+    public function storeFromDream(Request $request, $dreamId)
+    {
+        /** @var \App\Models\User $currentUser */
+        $currentUser = Auth::user();
+        
+        // Debug logging
+        Log::info('storeFromDream called', [
+            'dreamId' => $dreamId,
+            'user_id' => $currentUser->id,
+            'request_data' => $request->all()
+        ]);
+        
+        if (!$currentUser->hasEternalBond()) {
+            return redirect()->route('dashboard')->with('error', 'You need an Eternal Bond to create memories');
+        }
+
+        // Get the dream
+        $dream = \App\Models\Dream::findOrFail($dreamId);
+        $bond = $currentUser->eternalBond();
+
+        // Security check
+        if (!$bond || $dream->connection_id !== $bond->id) {
+            abort(403, 'Unauthorized access to this dream');
+        }
+
+        if ($dream->status !== 'fulfilled') {
+            return redirect()->back()->with('error', 'Only fulfilled dreams can become Memory Lane entries');
+        }
+
+        $request->validate([
+            'actual_date' => 'nullable|date',
+            'extended_description' => 'nullable|string',
+            'special_notes' => 'nullable|string',
+            'photos.*' => 'nullable|image|max:51200', // Validate each photo
+        ]);
+
+        // Determine the story date (use actual_date if provided, otherwise use destiny_date)
+        $storyDate = $request->actual_date ?? $dream->destiny_date->format('Y-m-d');
+
+        // Build description (combine extended_description and special_notes)
+        $description = $request->extended_description ?? $dream->description;
+        if ($request->special_notes) {
+            $description .= "\n\n**Special Notes:**\n" . $request->special_notes;
+        }
+
+        // Handle multiple photo uploads (use first photo as main media)
+        $mediaPath = null;
+        $mediaType = 'text'; // Default to text if no photos
+        
+        Log::info('Checking for photo uploads', [
+            'has_photos' => $request->hasFile('photos'),
+            'all_files' => array_keys($request->allFiles())
+        ]);
+        
+        if ($request->hasFile('photos')) {
+            $photos = $request->file('photos');
+            Log::info('Photos received', ['count' => count($photos)]);
+            
+            if (count($photos) > 0 && $photos[0]->isValid()) {
+                $mediaPath = $photos[0]->store('memories', 'public');
+                $mediaType = 'image';
+                Log::info('Photo stored', ['path' => $mediaPath]);
+            }
+        }
+
+        try {
+            // Create the memory
+            $memory = MemoryLane::create([
+                'user_id' => $currentUser->id,
+                'heading' => $dream->heading,
+                'title' => $dream->place, // Use place as title
+                'description' => $description,
+                'story_date' => $storyDate,
+                'media_type' => $mediaType,
+                'media_path' => $mediaPath,
+            ]);
+
+            Log::info('Memory created successfully', ['memory_id' => $memory->id]);
+
+            return redirect()->route('memory-lane.show', $memory->id)
+                ->with('success', '🎉 Your dream has been transformed into a beautiful memory!');
+                
+        } catch (\Exception $e) {
+            Log::error('Failed to create memory from dream', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return redirect()->back()
+                ->with('error', 'Failed to create memory: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 }
