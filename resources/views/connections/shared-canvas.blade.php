@@ -366,6 +366,15 @@
                     </div>
                 </a>
 
+                <!-- Love Letter Box - Active Feature -->
+                <a href="{{ route('love-letters.index') }}" class="nav-card">
+                    <div class="nav-card-icon">💌</div>
+                    <div class="nav-card-title">Letter Box</div>
+                    <div class="nav-card-description">
+                        Transmit your emotions through letters. Write and receive love letters with delivery dates.
+                    </div>
+                </a>
+
                 <!-- Future Features - Coming Soon -->
                 <div class="nav-card coming-soon-card">
                     <div class="nav-card-icon">💬</div>
@@ -380,14 +389,6 @@
                     <div class="nav-card-title">Important Dates</div>
                     <div class="nav-card-description">
                         Track anniversaries and special moments. Coming Soon!
-                    </div>
-                </div>
-
-                <div class="nav-card coming-soon-card">
-                    <div class="nav-card-icon">🎯</div>
-                    <div class="nav-card-title">Bucket List</div>
-                    <div class="nav-card-description">
-                        Plan your future adventures together. Coming Soon!
                     </div>
                 </div>
             </div>

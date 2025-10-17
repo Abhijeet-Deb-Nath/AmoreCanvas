@@ -10,3 +10,6 @@ Artisan::command('inspire', function () {
 
 // Schedule dream checks to run every hour
 Schedule::command('dreams:check-overdue')->hourly();
+
+// Schedule love letter delivery checks to run every minute
+Schedule::command('letters:deliver')->everyMinute();

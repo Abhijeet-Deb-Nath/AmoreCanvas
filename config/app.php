@@ -123,4 +123,18 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Love Letter Minimum Delivery Days
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the minimum number of days a love letter must
+    | wait before being delivered to the recipient. Set this to a lower
+    | value (e.g., 1/1440 for 1 minute) for demonstration purposes.
+    | Default: 3 days
+    |
+    */
+
+    'love_letter_min_delivery_days' => env('LOVE_LETTER_MIN_DELIVERY_DAYS', 1/1440),
+
 ];

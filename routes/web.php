@@ -6,6 +6,7 @@ use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\MemoryLaneController;
 use App\Http\Controllers\DreamController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LoveLetterController;
 
 // Redirect root to login
 Route::get('/', function () {
@@ -94,4 +95,14 @@ Route::middleware('auth')->group(function () {
     // Lived in the Dream Routes
     Route::get('/lived-in-the-dream', [DreamController::class, 'lived'])->name('dreams.lived');
     Route::get('/dreams/{id}/create-memory', [DreamController::class, 'createMemoryFromDream'])->name('dreams.create-memory');
+    
+    // Love Letter Routes
+    Route::get('/love-letters', [LoveLetterController::class, 'index'])->name('love-letters.index');
+    Route::get('/love-letters/create', [LoveLetterController::class, 'create'])->name('love-letters.create');
+    Route::post('/love-letters', [LoveLetterController::class, 'store'])->name('love-letters.store');
+    Route::get('/love-letters/{id}', [LoveLetterController::class, 'show'])->name('love-letters.show');
+    Route::post('/love-letters/{id}/mark-as-read', [LoveLetterController::class, 'markAsRead'])->name('love-letters.mark-as-read');
+    Route::get('/love-letters/{id}/download', [LoveLetterController::class, 'download'])->name('love-letters.download');
+    Route::post('/love-letters/{id}/add-to-memory-lane', [LoveLetterController::class, 'addToMemoryLane'])->name('love-letters.add-to-memory-lane');
+    Route::delete('/love-letters/{id}', [LoveLetterController::class, 'destroy'])->name('love-letters.destroy');
 });

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $letter->title }} - AmoreCanvas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fd79a8 50%, #fdcb6e 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h1 {
+            color: #e91e63;
+            font-size: 24px;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-btn, .action-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .action-btn.download {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .action-btn.memory {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .action-btn.delete {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+        }
+
+        .back-btn:hover, .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .letter-container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-container::before {
+            content: '💌';
+            position: absolute;
+            font-size: 200px;
+            top: -50px;
+            right: -50px;
+            opacity: 0.05;
+            transform: rotate(15deg);
+        }
+
+        .letter-header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 3px double #e91e63;
+            margin-bottom: 40px;
+        }
+
+        .letter-header h1 {
+            font-size: 36px;
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+
+        .letter-meta {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .letter-meta div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .letter-meta .label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #e91e63;
+        }
+
+        .letter-content {
+            line-height: 2;
+            font-size: 18px;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-content p {
+            margin-bottom: 20px;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 50px;
+            font-style: italic;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .action-section {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: #e91e63;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e91e63;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn.cancel {
+            background: #ccc;
+            color: #333;
+        }
+
+        .modal-btn.submit {
+            background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+            color: white;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 30px 20px;
+            }
+
+            .letter-header h1 {
+                font-size: 28px;
+            }
+
+            .letter-content {
+                font-size: 16px;
+            }
+
+            .navbar-right {
+                flex-wrap: wrap;
+            }
+
+            .action-section {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <h1>💌 Love Letter</h1>
+        <div class="navbar-right">
+            <a href="{{ route('love-letters.download', $letter->id) }}" class="action-btn download">
+                📥 Download
+            </a>
+            <a href="{{ route('love-letters.index') }}" class="back-btn">← Back</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        @if(session('success'))
+            <div style="background: #4CAF50; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div style="background: #f44336; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <div class="letter-container">
+            <!-- Letter Header -->
+            <div class="letter-header">
+                <h1>{{ $letter->title }}</h1>
+                <div class="letter-meta">
+                    <div>
+                        <span class="label">From</span>
+                        <span>{{ $letter->sender->name }}</span>
+                    </div>
+                    <div>
+                        <span class="label">Written</span>
+                        <span>{{ $letter->created_at->format('F j, Y \a\t g:i A') }}</span>
+                    </div>
+                    <div>
+                        <span class="label">Delivered</span>
+                        <span>{{ $letter->delivered_at->format('F j, Y \a\t g:i A') }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter Content -->
+            <div class="letter-content">
+                {!! $letter->content !!}
+            </div>
+
+            <!-- Letter Signature -->
+            <div class="letter-signature">
+                With all my love,<br>
+                {{ $letter->sender->name }} 💕
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="action-section">
+            @if(!$letter->is_in_memory_lane)
+                <button onclick="showMemoryLaneModal()" class="action-btn memory">
+                    💝 Add to Memory Lane
+                </button>
+                <button onclick="showDeleteWarning()" class="action-btn delete">
+                    🗑️ Delete Letter
+                </button>
+            @else
+                <div style="text-align: center; padding: 20px; color: #666; font-style: italic;">
+                    This letter has been preserved in your Memory Lane 💕
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Add to Memory Lane Modal -->
+    <div id="memoryLaneModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add to Memory Lane 💕</h2>
+                <p>Add a note to remember this special moment</p>
+            </div>
+            <form action="{{ route('love-letters.add-to-memory-lane', $letter->id) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="memory_note">Memory Note *</label>
+                    <textarea id="memory_note" name="memory_note" placeholder="Write about what this letter means to you..." required maxlength="500"></textarea>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Maximum 500 characters</div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="closeMemoryLaneModal()" class="modal-btn cancel">Cancel</button>
+                    <button type="submit" class="modal-btn submit">Add to Memory Lane</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Warning Modal -->
+    <div id="deleteWarningModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ Wait!</h2>
+                <p>You must add this letter to Memory Lane before deleting it</p>
+            </div>
+            <div style="text-align: center; color: #666; margin: 20px 0; line-height: 1.6;">
+                <p>This is to preserve the memory even after the physical letter is deleted.</p>
+                <p style="margin-top: 10px;">Please add it to Memory Lane first, then you can delete it.</p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" onclick="closeDeleteWarning()" class="modal-btn cancel">Okay, I understand</button>
+                <button type="button" onclick="closeDeleteWarning(); showMemoryLaneModal();" class="modal-btn submit">
+                    Add to Memory Lane Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMemoryLaneModal() {
+            document.getElementById('memoryLaneModal').classList.add('active');
+        }
+
+        function closeMemoryLaneModal() {
+            document.getElementById('memoryLaneModal').classList.remove('active');
+        }
+
+        function showDeleteWarning() {
+            document.getElementById('deleteWarningModal').classList.add('active');
+        }
+
+        function closeDeleteWarning() {
+            document.getElementById('deleteWarningModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

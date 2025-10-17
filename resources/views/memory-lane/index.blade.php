@@ -126,6 +126,37 @@
             box-shadow: 0 10px 25px rgba(233, 30, 99, 0.4);
         }
 
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            gap: 15px;
+        }
+
+        .filter-label {
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .filter-dropdown {
+            padding: 10px 20px;
+            border: 2px solid #e91e63;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Georgia', serif;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-dropdown:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.3);
+        }
+
         .memories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -300,6 +331,18 @@
             <a href="{{ route('memory-lane.create') }}" class="create-btn">+ Create New Memory</a>
         </div>
 
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <label class="filter-label" for="memoryFilter">Filter by Type:</label>
+            <select id="memoryFilter" class="filter-dropdown" onchange="filterMemories(this.value)">
+                <option value="all" {{ isset($filter) && $filter == 'all' ? 'selected' : '' }}>All Memories</option>
+                <option value="image" {{ isset($filter) && $filter == 'image' ? 'selected' : '' }}>📷 Photos</option>
+                <option value="video" {{ isset($filter) && $filter == 'video' ? 'selected' : '' }}>🎥 Videos</option>
+                <option value="audio" {{ isset($filter) && $filter == 'audio' ? 'selected' : '' }}>🎵 Audio</option>
+                <option value="text" {{ isset($filter) && $filter == 'text' ? 'selected' : '' }}>💌 Love Letters</option>
+            </select>
+        </div>
+
         @if($memories->count() > 0)
             <div class="memories-grid">
                 @foreach($memories as $memory)
@@ -343,5 +386,11 @@
             </div>
         @endif
     </div>
+
+    <script>
+        function filterMemories(type) {
+            window.location.href = '{{ route("memory-lane.index") }}?type=' + type;
+        }
+    </script>
 </body>
 </html>

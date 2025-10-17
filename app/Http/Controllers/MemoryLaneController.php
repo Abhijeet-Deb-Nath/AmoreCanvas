@@ -14,7 +14,7 @@ class MemoryLaneController extends Controller
     /**
      * Display a listing of all memories in the shared space
      */
-    public function index()
+    public function index(Request $request)
     {
         /** @var \App\Models\User $currentUser */
         $currentUser = Auth::user();
@@ -26,14 +26,25 @@ class MemoryLaneController extends Controller
 
         $partner = $currentUser->partner();
         
-        // Get all memories from both users, ordered by story_date
-        $memories = MemoryLane::where('user_id', $currentUser->id)
-            ->orWhere('user_id', $partner->id)
-            ->orderBy('story_date', 'desc')
+        // Get filter type
+        $filter = $request->get('type', 'all');
+        
+        // Build query for memories from both users
+        $query = MemoryLane::where(function($q) use ($currentUser, $partner) {
+            $q->where('user_id', $currentUser->id)
+              ->orWhere('user_id', $partner->id);
+        });
+        
+        // Apply filter if needed
+        if ($filter !== 'all') {
+            $query->where('media_type', $filter);
+        }
+        
+        $memories = $query->orderBy('story_date', 'desc')
             ->with('user', 'reviews.reviewer')
             ->get();
 
-        return view('memory-lane.index', compact('memories', 'partner'));
+        return view('memory-lane.index', compact('memories', 'partner', 'filter'));
     }
 
     /**
