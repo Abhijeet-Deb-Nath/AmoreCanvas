@@ -104,5 +104,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/love-letters/{id}/mark-as-read', [LoveLetterController::class, 'markAsRead'])->name('love-letters.mark-as-read');
     Route::get('/love-letters/{id}/download', [LoveLetterController::class, 'download'])->name('love-letters.download');
     Route::post('/love-letters/{id}/add-to-memory-lane', [LoveLetterController::class, 'addToMemoryLane'])->name('love-letters.add-to-memory-lane');
+    Route::delete('/love-letters/{id}/permanent', [LoveLetterController::class, 'permanentDelete'])->name('love-letters.permanent-delete');
     Route::delete('/love-letters/{id}', [LoveLetterController::class, 'destroy'])->name('love-letters.destroy');
 });

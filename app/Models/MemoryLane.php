@@ -11,6 +11,8 @@ class MemoryLane extends Model
 
     protected $fillable = [
         'user_id',
+        'love_letter_id',
+        'letter_content',
         'heading',
         'title',
         'description',
@@ -29,6 +31,14 @@ class MemoryLane extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the love letter associated with this memory (if any)
+     */
+    public function loveLetter()
+    {
+        return $this->belongsTo(LoveLetter::class);
     }
 
     /**

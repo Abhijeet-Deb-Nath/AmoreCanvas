@@ -345,13 +345,18 @@
                 <button onclick="showMemoryLaneModal()" class="action-btn memory">
                     💝 Add to Memory Lane
                 </button>
-                <button onclick="showDeleteWarning()" class="action-btn delete">
-                    🗑️ Delete Letter
+                <button onclick="showPermanentDeleteModal()" class="action-btn delete">
+                    🗑️ Delete Permanently
                 </button>
             @else
-                <div style="text-align: center; padding: 20px; color: #666; font-style: italic;">
-                    This letter has been preserved in your Memory Lane 💕
+                <div style="text-align: center; padding: 15px 20px; background: linear-gradient(135deg, #fff5f8 0%, #ffe6f0 100%); border-radius: 10px; margin-bottom: 15px;">
+                    <p style="color: #666; font-style: italic; margin-bottom: 10px;">
+                        ✨ This letter has been preserved in your Memory Lane 💕
+                    </p>
                 </div>
+                <button onclick="showMemoryLaneDeleteModal()" class="action-btn delete">
+                    🗑️ Delete from Memory Lane & Letter Box
+                </button>
             @endif
         </div>
     </div>
@@ -378,22 +383,54 @@
         </div>
     </div>
 
-    <!-- Delete Warning Modal -->
-    <div id="deleteWarningModal" class="modal">
+    <!-- Permanent Delete Confirmation Modal -->
+    <div id="permanentDeleteModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>⚠️ Wait!</h2>
-                <p>You must add this letter to Memory Lane before deleting it</p>
+                <h2>⚠️ Permanent Delete</h2>
+                <p>Are you absolutely sure?</p>
             </div>
             <div style="text-align: center; color: #666; margin: 20px 0; line-height: 1.6;">
-                <p>This is to preserve the memory even after the physical letter is deleted.</p>
-                <p style="margin-top: 10px;">Please add it to Memory Lane first, then you can delete it.</p>
+                <p><strong>This letter will be deleted forever</strong> and cannot be recovered.</p>
+                <p style="margin-top: 10px;">If you want to keep the memory, add it to Memory Lane instead.</p>
             </div>
             <div class="modal-actions">
-                <button type="button" onclick="closeDeleteWarning()" class="modal-btn cancel">Okay, I understand</button>
-                <button type="button" onclick="closeDeleteWarning(); showMemoryLaneModal();" class="modal-btn submit">
-                    Add to Memory Lane Now
+                <button type="button" onclick="closePermanentDeleteModal()" class="modal-btn cancel">Cancel</button>
+                <button type="button" onclick="closePermanentDeleteModal(); showMemoryLaneModal();" class="modal-btn submit">
+                    Add to Memory Lane
                 </button>
+                <form action="{{ route('love-letters.permanent-delete', $letter->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="modal-btn" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                        Delete Forever
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory Lane Delete Confirmation Modal -->
+    <div id="memoryLaneDeleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚠️ Delete from Memory Lane</h2>
+                <p>This will remove the letter from both places</p>
+            </div>
+            <div style="text-align: center; color: #666; margin: 20px 0; line-height: 1.6;">
+                <p><strong>This will delete:</strong></p>
+                <p style="margin-top: 10px;">✗ The letter from Letter Box<br>✗ The memory from Memory Lane</p>
+                <p style="margin-top: 10px; color: #e74c3c;">This action cannot be undone.</p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" onclick="closeMemoryLaneDeleteModal()" class="modal-btn cancel">Cancel</button>
+                <form action="{{ route('love-letters.destroy', $letter->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="modal-btn" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                        Delete Both
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -407,12 +444,20 @@
             document.getElementById('memoryLaneModal').classList.remove('active');
         }
 
-        function showDeleteWarning() {
-            document.getElementById('deleteWarningModal').classList.add('active');
+        function showPermanentDeleteModal() {
+            document.getElementById('permanentDeleteModal').classList.add('active');
         }
 
-        function closeDeleteWarning() {
-            document.getElementById('deleteWarningModal').classList.remove('active');
+        function closePermanentDeleteModal() {
+            document.getElementById('permanentDeleteModal').classList.remove('active');
+        }
+
+        function showMemoryLaneDeleteModal() {
+            document.getElementById('memoryLaneDeleteModal').classList.add('active');
+        }
+
+        function closeMemoryLaneDeleteModal() {
+            document.getElementById('memoryLaneDeleteModal').classList.remove('active');
         }
 
         // Close modal when clicking outside

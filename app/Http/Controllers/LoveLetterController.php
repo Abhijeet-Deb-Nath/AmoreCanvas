@@ -281,36 +281,17 @@ class LoveLetterController extends Controller
             'memory_note' => 'required|string|max:500',
         ]);
         
-        // Save letter as HTML file in storage
-        $html = "<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='UTF-8'>
-    <title>{$letter->title}</title>
-    <style>
-        body { font-family: 'Georgia', serif; padding: 20px; line-height: 1.8; }
-        .letter-title { font-size: 24px; color: #e91e63; margin-bottom: 20px; }
-        .letter-content { font-size: 16px; color: #333; }
-    </style>
-</head>
-<body>
-    <h1 class='letter-title'>{$letter->title}</h1>
-    <div class='letter-content'>{$letter->content}</div>
-</body>
-</html>";
-        
-        $filename = 'love-letter-' . $letter->id . '-' . time() . '.html';
-        Storage::disk('public')->put('memories/' . $filename, $html);
-        
-        // Create Memory Lane entry
+        // Create Memory Lane entry with full letter content
         MemoryLane::create([
             'user_id' => $currentUser->id,
-            'heading' => 'Love Letter: ' . $letter->title,
+            'love_letter_id' => $letter->id,
+            'letter_content' => $letter->content, // Store the full HTML content
+            'heading' => $letter->title,
             'title' => 'From ' . $letter->sender->name,
             'description' => $request->memory_note,
             'story_date' => $letter->delivered_at,
             'media_type' => 'text',
-            'media_path' => 'memories/' . $filename,
+            'media_path' => null, // No separate file needed, content is in DB
         ]);
         
         // Mark letter as added to Memory Lane
@@ -321,7 +302,33 @@ class LoveLetterController extends Controller
     }
 
     /**
-     * Delete a letter (requires adding to Memory Lane first)
+     * Permanently delete a letter (without adding to Memory Lane)
+     */
+    public function permanentDelete($id)
+    {
+        /** @var \App\Models\User $currentUser */
+        $currentUser = Auth::user();
+        
+        $letter = LoveLetter::findOrFail($id);
+        
+        // Only the receiver can delete the letter
+        if ($letter->receiver_id !== $currentUser->id) {
+            abort(403);
+        }
+        
+        // Cannot delete if already in Memory Lane
+        if ($letter->is_in_memory_lane) {
+            return redirect()->back()->with('error', 'This letter is in Memory Lane. Use the Memory Lane delete option instead.');
+        }
+        
+        $letter->delete();
+        
+        return redirect()->route('love-letters.index')
+            ->with('success', 'Love letter deleted permanently');
+    }
+
+    /**
+     * Delete a letter that's in Memory Lane (also removes from Memory Lane)
      */
     public function destroy($id)
     {
@@ -335,14 +342,18 @@ class LoveLetterController extends Controller
             abort(403);
         }
         
-        // Must be added to Memory Lane before deletion
+        // Must be in Memory Lane to use this method
         if (!$letter->is_in_memory_lane) {
-            return redirect()->back()->with('error', 'You must add this letter to Memory Lane before deleting it');
+            return redirect()->back()->with('error', 'Use permanent delete for letters not in Memory Lane');
         }
         
+        // Delete the Memory Lane entry
+        MemoryLane::where('love_letter_id', $letter->id)->delete();
+        
+        // Delete the letter
         $letter->delete();
         
         return redirect()->route('love-letters.index')
-            ->with('success', 'Love letter deleted successfully');
+            ->with('success', 'Love letter and Memory Lane entry deleted successfully');
     }
 }

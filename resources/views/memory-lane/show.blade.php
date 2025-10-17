@@ -422,7 +422,18 @@
         @endif
 
         <div class="memory-details">
-            @if($memory->media_path)
+            @if($memory->love_letter_id && $memory->letter_content)
+                <!-- Love Letter Content Display -->
+                <div class="memory-media-container" style="background: linear-gradient(135deg, #fff5f8 0%, #ffe6f0 100%); border: 2px solid #e91e63; padding: 30px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <span style="font-size: 48px;">💌</span>
+                        <p style="color: #e91e63; font-size: 14px; margin-top: 10px;">Love Letter Preserved in Memory Lane</p>
+                    </div>
+                    <div class="love-letter-content" style="font-family: 'Georgia', serif; line-height: 1.8; color: #333;">
+                        {!! $memory->letter_content !!}
+                    </div>
+                </div>
+            @elseif($memory->media_path)
                 <div class="memory-media-container">
                     @if($memory->media_type === 'image')
                         <img src="{{ asset('storage/' . $memory->media_path) }}" alt="{{ $memory->heading }}">
