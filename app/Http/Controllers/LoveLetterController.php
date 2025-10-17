@@ -128,13 +128,21 @@ class LoveLetterController extends Controller
 
         // Dispatch delayed job to deliver the letter at scheduled time
         $deliveryTime = Carbon::parse($request->scheduled_delivery_at);
-        $delay = $deliveryTime->diffInSeconds(now());
+        $currentTime = now();
         
-        // Dispatch the job with delay
-        \App\Jobs\SendLoveLetterDeliveryEmail::dispatch($letter)->delay($delay);
+        // Calculate delay - using Carbon's delay() method with datetime
+        // This is more reliable than calculating seconds manually
+        Log::info("Scheduling love letter {$letter->id} for delivery", [
+            'scheduled_time' => $deliveryTime->toDateTimeString(),
+            'current_time' => $currentTime->toDateTimeString(),
+            'delay_seconds' => $deliveryTime->diffInSeconds($currentTime),
+        ]);
+        
+        // Use delay() with Carbon datetime instance for accurate scheduling
+        \App\Jobs\SendLoveLetterDeliveryEmail::dispatch($letter)->delay($deliveryTime);
 
         return redirect()->route('love-letters.index')
-            ->with('success', 'Your love letter has been sent! It will be delivered on ' . Carbon::parse($request->scheduled_delivery_at)->format('F j, Y \a\t g:i A') . ' 💌');
+            ->with('success', 'Your love letter has been sent! It will be delivered on ' . $deliveryTime->format('F j, Y \a\t g:i A') . ' 💌');
     }
 
     /**
