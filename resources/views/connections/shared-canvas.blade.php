@@ -9,6 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            text-decoration: none;
         }
 
         body {
@@ -299,7 +300,7 @@
     <div class="heart">♥</div>
 
     <div class="navbar">
-        <h1>♥ AmoreCanvas</h1>
+        <a href="{{ route('shared.canvas') }}"><h1>♥ AmoreCanvas</h1></a>
         <div class="navbar-right">
             <a href="{{ route('profile.edit') }}" class="profile-btn">✏️ Edit Profile</a>
             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
