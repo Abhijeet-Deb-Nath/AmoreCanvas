@@ -9,46 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ConnectionController extends Controller
 {
-    /**
-     * Show users to send heart invitations to
-     */
-    public function findSoulmate(Request $request)
-    {
-        /** @var \App\Models\User $currentUser */
-        $currentUser = Auth::user();
-        
-        // If user already has an eternal bond, redirect to sanctuary
-        if ($currentUser->hasEternalBond()) {
-            return redirect()->route('sanctuary');
-        }
-
-        // Get search query
-        $search = $request->input('search', '');
-
-        // Get all users except current user and those already connected
-        $users = User::where('id', '!=', $currentUser->id)
-            ->when($search, function ($query, $search) {
-                return $query->where('email', 'like', "%{$search}%");
-            })
-            ->get()
-            ->filter(function ($user) use ($currentUser) {
-                // Exclude users who already have an eternal bond
-                if ($user->hasEternalBond()) return false;
-                
-                // Check if there's already a connection between these users
-                $existingConnection = Connection::where(function ($query) use ($currentUser, $user) {
-                    $query->where('sender_id', $currentUser->id)
-                          ->where('receiver_id', $user->id);
-                })->orWhere(function ($query) use ($currentUser, $user) {
-                    $query->where('sender_id', $user->id)
-                          ->where('receiver_id', $currentUser->id);
-                })->first();
-                
-                return !$existingConnection;
-            });
-
-        return view('connections.find-soulmate', compact('users', 'search'));
-    }
+    
 
     /**
      * Send a heart invitation by email
