@@ -18,6 +18,27 @@
         .btn-secondary { background: #6c757d; color: white; }
         .btn-danger { background: #ef5350; color: white; }
         .empty-state { text-align: center; color: white; padding: 60px; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .header h1 { font-size: 36px; }
+            .header p { font-size: 14px; }
+            .nav-buttons { gap: 10px; }
+            .nav-buttons a { padding: 10px 18px; font-size: 14px; }
+            .dreams-grid { grid-template-columns: 1fr; gap: 20px; }
+            .dream-card { padding: 20px; }
+            .dream-card h3 { font-size: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .header h1 { font-size: 28px; }
+            .nav-buttons a { padding: 9px 16px; font-size: 13px; }
+            .dream-card { padding: 18px; }
+            .dream-card h3 { font-size: 18px; }
+            .btn { padding: 9px 18px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>

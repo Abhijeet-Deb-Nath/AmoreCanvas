@@ -243,6 +243,117 @@
         form {
             display: inline;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .header {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-buttons a {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+
+            .dreams-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .dream-card {
+                padding: 20px;
+            }
+
+            .dream-card h3 {
+                font-size: 20px;
+            }
+
+            .dream-card h4 {
+                font-size: 16px;
+            }
+
+            .dream-card p {
+                font-size: 14px;
+            }
+
+            .dream-actions {
+                flex-direction: column;
+            }
+
+            .dream-actions a,
+            .dream-actions button {
+                width: 100%;
+                text-align: center;
+                font-size: 13px;
+                padding: 9px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .header p {
+                font-size: 13px;
+            }
+
+            .nav-buttons a {
+                padding: 9px 16px;
+                font-size: 13px;
+            }
+
+            .dream-card {
+                padding: 18px;
+            }
+
+            .dream-card h3 {
+                font-size: 18px;
+            }
+
+            .dream-card h4 {
+                font-size: 15px;
+            }
+
+            .dream-tag {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+        }
     </style>
 </head>
 <body>

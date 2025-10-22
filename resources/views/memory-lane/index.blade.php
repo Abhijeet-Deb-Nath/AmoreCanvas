@@ -294,6 +294,180 @@
             color: #721c24;
             border-left: 4px solid #dc3545;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .navbar-right {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .back-btn,
+            .logout-btn {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .header h2 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .action-btn {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item::before {
+                left: -29px;
+                width: 16px;
+                height: 16px;
+            }
+
+            .memory-card {
+                padding: 20px;
+            }
+
+            .memory-card h3 {
+                font-size: 20px;
+            }
+
+            .memory-card p {
+                font-size: 14px;
+            }
+
+            .memory-image,
+            .memory-video {
+                max-height: 250px;
+            }
+
+            .memory-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .memory-actions a,
+            .memory-actions button {
+                width: 100%;
+                text-align: center;
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            .review-box {
+                padding: 12px;
+            }
+
+            .reviewer-info {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .back-btn,
+            .logout-btn {
+                font-size: 12px;
+                padding: 7px 14px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h2 {
+                font-size: 24px;
+            }
+
+            .header p {
+                font-size: 13px;
+            }
+
+            .action-btn {
+                font-size: 13px;
+                padding: 9px 16px;
+            }
+
+            .timeline {
+                padding-left: 25px;
+            }
+
+            .memory-card {
+                padding: 18px;
+            }
+
+            .memory-card h3 {
+                font-size: 18px;
+            }
+
+            .memory-date {
+                font-size: 12px;
+            }
+
+            .memory-image,
+            .memory-video {
+                max-height: 200px;
+            }
+
+            .review-box {
+                padding: 10px;
+            }
+
+            .rating-stars {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>

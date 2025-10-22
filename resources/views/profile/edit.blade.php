@@ -150,6 +150,96 @@
             background: #e0e0e0;
             margin: 30px 0;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .navbar a {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .profile-card {
+                padding: 25px 20px;
+            }
+
+            .profile-card h2 {
+                font-size: 24px;
+            }
+
+            .form-group label {
+                font-size: 15px;
+            }
+
+            .form-group input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+            }
+
+            .navbar a {
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 15px 10px;
+            }
+
+            .profile-card {
+                padding: 20px 15px;
+            }
+
+            .profile-card h2 {
+                font-size: 22px;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            .form-group label {
+                font-size: 14px;
+            }
+
+            .form-group input {
+                padding: 9px;
+                font-size: 13px;
+            }
+
+            .btn {
+                padding: 9px 18px;
+                font-size: 13px;
+            }
+
+            .alert {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>

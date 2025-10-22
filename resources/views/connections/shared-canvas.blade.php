@@ -288,6 +288,156 @@
             transform: none;
             border-color: transparent;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .navbar-right {
+                gap: 10px;
+            }
+
+            .profile-btn,
+            .logout-btn {
+                font-size: 13px;
+                padding: 8px 18px;
+            }
+
+            .container {
+                padding: 0 20px;
+                margin: 30px auto;
+            }
+
+            .canvas-header {
+                padding: 35px 25px;
+            }
+
+            .canvas-header h2 {
+                font-size: 32px;
+            }
+
+            .canvas-header p {
+                font-size: 15px;
+            }
+
+            .bond-info {
+                padding: 20px;
+            }
+
+            .bond-info h3 {
+                font-size: 20px;
+            }
+
+            .bond-info p {
+                font-size: 14px;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .nav-card {
+                padding: 25px 20px;
+            }
+
+            .nav-card-icon {
+                font-size: 40px;
+            }
+
+            .nav-card-title {
+                font-size: 20px;
+            }
+
+            .nav-card-description {
+                font-size: 13px;
+            }
+
+            .sanctuary-link {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .profile-btn,
+            .logout-btn {
+                font-size: 12px;
+                padding: 7px 14px;
+            }
+
+            .container {
+                padding: 0 15px;
+                margin: 20px auto;
+            }
+
+            .canvas-header {
+                padding: 25px 20px;
+            }
+
+            .canvas-header h2 {
+                font-size: 28px;
+            }
+
+            .canvas-header p {
+                font-size: 14px;
+            }
+
+            .bond-info {
+                padding: 18px;
+            }
+
+            .bond-info h3 {
+                font-size: 18px;
+            }
+
+            .bond-info p {
+                font-size: 13px;
+            }
+
+            .nav-card {
+                padding: 20px 18px;
+            }
+
+            .nav-card-icon {
+                font-size: 36px;
+            }
+
+            .nav-card-title {
+                font-size: 18px;
+            }
+
+            .nav-card-description {
+                font-size: 12px;
+            }
+
+            .sanctuary-link {
+                padding: 11px 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>

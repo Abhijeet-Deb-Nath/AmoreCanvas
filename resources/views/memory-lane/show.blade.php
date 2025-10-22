@@ -398,6 +398,154 @@
             border-radius: 6px;
             cursor: pointer;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .back-btn,
+            .edit-btn,
+            .delete-btn {
+                font-size: 13px;
+                padding: 7px 14px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .memory-detail {
+                padding: 25px 20px;
+            }
+
+            .memory-detail h2 {
+                font-size: 28px;
+            }
+
+            .memory-detail .date {
+                font-size: 13px;
+            }
+
+            .memory-detail p {
+                font-size: 15px;
+            }
+
+            .memory-media img,
+            .memory-media video {
+                max-height: 350px;
+            }
+
+            .reviews-section {
+                padding: 25px 20px;
+            }
+
+            .reviews-section h3 {
+                font-size: 24px;
+            }
+
+            .review-item {
+                padding: 15px;
+            }
+
+            .reviewer-name {
+                font-size: 15px;
+            }
+
+            .review-form textarea {
+                min-height: 100px;
+            }
+
+            .submit-review-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+            }
+
+            .navbar-right {
+                width: 100%;
+            }
+
+            .back-btn,
+            .edit-btn,
+            .delete-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .memory-detail {
+                padding: 20px 15px;
+            }
+
+            .memory-detail h2 {
+                font-size: 24px;
+            }
+
+            .memory-detail .date {
+                font-size: 12px;
+            }
+
+            .memory-detail p {
+                font-size: 14px;
+            }
+
+            .memory-media img,
+            .memory-media video {
+                max-height: 250px;
+            }
+
+            .reviews-section {
+                padding: 20px 15px;
+            }
+
+            .reviews-section h3 {
+                font-size: 22px;
+            }
+
+            .review-item {
+                padding: 12px;
+            }
+
+            .rating-stars {
+                font-size: 18px;
+            }
+
+            .review-form textarea {
+                min-height: 90px;
+                font-size: 14px;
+            }
+
+            .submit-review-btn {
+                padding: 9px 18px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>

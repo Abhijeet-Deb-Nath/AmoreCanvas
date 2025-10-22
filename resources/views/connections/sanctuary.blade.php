@@ -199,6 +199,185 @@
             color: #555;
             font-size: 16px;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .navbar-right {
+                gap: 10px;
+            }
+
+            .navbar-right a {
+                font-size: 14px;
+            }
+
+            .logout-btn {
+                font-size: 13px;
+                padding: 8px 18px;
+            }
+
+            .container {
+                padding: 0 20px;
+                margin-top: 30px;
+            }
+
+            .sanctuary-card {
+                padding: 35px 25px;
+            }
+
+            .sanctuary-card h2 {
+                font-size: 32px;
+            }
+
+            .sanctuary-card p {
+                font-size: 15px;
+            }
+
+            .invite-section {
+                padding: 25px 20px;
+            }
+
+            .invite-section h3 {
+                font-size: 24px;
+            }
+
+            .form-group input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .invite-btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .bond-request {
+                padding: 20px;
+            }
+
+            .bond-request h3 {
+                font-size: 20px;
+            }
+
+            .bond-request p {
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .coming-soon {
+                padding: 25px;
+            }
+
+            .coming-soon h4 {
+                font-size: 20px;
+            }
+
+            .coming-soon p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .navbar-right a {
+                font-size: 13px;
+            }
+
+            .logout-btn {
+                font-size: 12px;
+                padding: 7px 14px;
+            }
+
+            .container {
+                padding: 0 15px;
+                margin-top: 20px;
+            }
+
+            .sanctuary-card {
+                padding: 25px 20px;
+            }
+
+            .sanctuary-card h2 {
+                font-size: 28px;
+            }
+
+            .sanctuary-card p {
+                font-size: 14px;
+            }
+
+            .invite-section {
+                padding: 20px 15px;
+            }
+
+            .invite-section h3 {
+                font-size: 22px;
+            }
+
+            .form-group input {
+                padding: 9px;
+                font-size: 13px;
+            }
+
+            .invite-btn {
+                padding: 11px;
+                font-size: 14px;
+            }
+
+            .bond-request {
+                padding: 18px;
+            }
+
+            .bond-request h3 {
+                font-size: 18px;
+            }
+
+            .bond-request p {
+                font-size: 13px;
+            }
+
+            .btn {
+                padding: 9px 18px;
+                font-size: 13px;
+            }
+
+            .coming-soon {
+                padding: 20px;
+            }
+
+            .coming-soon h4 {
+                font-size: 18px;
+            }
+
+            .coming-soon p {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>

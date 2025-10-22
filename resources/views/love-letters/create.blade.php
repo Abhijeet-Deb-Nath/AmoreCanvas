@@ -209,15 +209,79 @@
             }
 
             .letter-form-card {
-                padding: 25px;
+                padding: 25px 20px;
             }
 
             .navbar {
                 padding: 15px 20px;
             }
 
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .back-btn {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
             #editor-container {
                 height: 300px;
+            }
+
+            .form-group label {
+                font-size: 15px;
+            }
+
+            .form-group input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .letter-form-card {
+                padding: 20px 15px;
+            }
+
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+            }
+
+            .back-btn {
+                font-size: 13px;
+                padding: 7px 14px;
+            }
+
+            #editor-container {
+                height: 250px;
+            }
+
+            .form-group label {
+                font-size: 14px;
+            }
+
+            .form-group input {
+                padding: 9px;
+                font-size: 13px;
+            }
+
+            .btn {
+                padding: 9px 18px;
+                font-size: 13px;
             }
         }
     </style>
