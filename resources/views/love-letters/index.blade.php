@@ -240,14 +240,123 @@
 
             .letters-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             .navbar {
                 padding: 15px 20px;
             }
 
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .navbar-right {
+                gap: 10px;
+            }
+
+            .back-btn,
+            .logout-btn {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+
             .header-section h2 {
                 font-size: 28px;
+            }
+
+            .header-section p {
+                font-size: 14px;
+            }
+
+            .write-btn {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+
+            .letter-card {
+                padding: 20px;
+            }
+
+            .letter-card h3 {
+                font-size: 20px;
+            }
+
+            .empty-state h3 {
+                font-size: 28px;
+            }
+
+            .empty-state p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .navbar {
+                padding: 12px 15px;
+                flex-wrap: wrap;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .back-btn,
+            .logout-btn {
+                font-size: 12px;
+                padding: 7px 14px;
+            }
+
+            .header-section {
+                padding: 25px 20px;
+            }
+
+            .header-section h2 {
+                font-size: 24px;
+            }
+
+            .header-section p {
+                font-size: 13px;
+            }
+
+            .write-btn {
+                padding: 11px 20px;
+                font-size: 14px;
+            }
+
+            .letter-card {
+                padding: 18px;
+            }
+
+            .letter-card h3 {
+                font-size: 18px;
+            }
+
+            .letter-meta {
+                font-size: 12px;
+            }
+
+            .empty-state {
+                padding: 45px 20px;
+            }
+
+            .empty-state h3 {
+                font-size: 24px;
+            }
+
+            .empty-state p {
+                font-size: 14px;
             }
         }
     </style>

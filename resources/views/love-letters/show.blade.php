@@ -259,6 +259,25 @@
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .navbar-right {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .action-btn,
+            .back-btn {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
             .letter-container {
                 padding: 30px 20px;
             }
@@ -267,16 +286,101 @@
                 font-size: 28px;
             }
 
-            .letter-content {
-                font-size: 16px;
+            .letter-header .from {
+                font-size: 15px;
             }
 
-            .navbar-right {
-                flex-wrap: wrap;
+            .letter-header .to {
+                font-size: 15px;
+            }
+
+            .letter-content {
+                font-size: 16px;
+                padding: 25px 20px;
             }
 
             .action-section {
                 flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .action-section button,
+            .action-section form button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .delivery-info {
+                padding: 15px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+                flex-wrap: wrap;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .action-btn,
+            .back-btn {
+                font-size: 13px;
+                padding: 7px 14px;
+            }
+
+            .letter-container {
+                padding: 25px 15px;
+            }
+
+            .letter-header h1 {
+                font-size: 24px;
+            }
+
+            .letter-header .from,
+            .letter-header .to {
+                font-size: 14px;
+            }
+
+            .letter-content {
+                font-size: 15px;
+                padding: 20px 15px;
+            }
+
+            .action-section {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .action-section button,
+            .action-section form button {
+                width: 100%;
+                padding: 9px 18px;
+                font-size: 13px;
+            }
+
+            .delivery-info {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .modal-content {
+                padding: 25px 20px;
+                width: 95%;
+            }
+
+            .modal-content h3 {
+                font-size: 20px;
             }
         }
     </style>

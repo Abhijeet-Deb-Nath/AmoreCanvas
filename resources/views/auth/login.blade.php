@@ -182,6 +182,85 @@
         .signup-link a:hover {
             text-decoration: underline;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .container {
+                padding: 35px 30px;
+                max-width: 100%;
+            }
+
+            .logo h1 {
+                font-size: 32px;
+            }
+
+            .logo p {
+                font-size: 13px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .form-group input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .submit-btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .signup-link {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .container {
+                padding: 30px 25px;
+            }
+
+            .logo h1 {
+                font-size: 28px;
+            }
+
+            .logo p {
+                font-size: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            .form-group label {
+                font-size: 12px;
+            }
+
+            .form-group input {
+                padding: 9px;
+                font-size: 13px;
+            }
+
+            .submit-btn {
+                padding: 11px;
+                font-size: 14px;
+            }
+
+            .signup-link {
+                font-size: 12px;
+                margin-top: 20px;
+            }
+        }
     </style>
 </head>
 <body>

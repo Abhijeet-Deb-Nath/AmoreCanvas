@@ -33,6 +33,28 @@
         .ampm-option { flex: 1; background: transparent; border: none; color: #666; font-weight: bold; cursor: pointer; transition: all 0.3s; font-family: 'Georgia', serif; font-size: 14px; }
         .ampm-option.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
         .ampm-option:hover:not(.active) { background: #d0d0d0; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .card { padding: 25px 20px; border-radius: 15px; }
+            .header h1 { font-size: 26px; }
+            .form-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .form-group input, .form-group textarea { font-size: 14px; padding: 9px; }
+            .btn { padding: 10px 20px; font-size: 14px; }
+            .negotiation-item { padding: 15px; }
+            .nav-link { padding: 8px 16px; font-size: 14px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .card { padding: 20px 15px; }
+            .header h1 { font-size: 22px; }
+            .form-row { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+            .form-group input, .form-group textarea { font-size: 13px; padding: 8px; }
+            .btn { padding: 9px 18px; font-size: 13px; }
+            .negotiation-item { padding: 12px; }
+        }
     </style>
     <script>
         function convert12to24(hour12, period) {

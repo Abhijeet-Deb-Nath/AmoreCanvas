@@ -74,47 +74,7 @@ class ConnectionController extends Controller
         return redirect()->route('dashboard')->with('success', 'Heart Invitation sent successfully!');
     }
 
-    /**
-     * Send a heart invitation
-     */
-    public function sendInvitation($userId)
-    {
-        /** @var \App\Models\User $currentUser */
-        $currentUser = Auth::user();
-        $receiver = User::findOrFail($userId);
-
-        // Check if current user already has an eternal bond
-        if ($currentUser->hasEternalBond()) {
-            return redirect()->route('dashboard')->with('error', 'You already have an Eternal Bond.');
-        }
-
-        // Check if receiver already has an eternal bond
-        if ($receiver->hasEternalBond()) {
-            return redirect()->back()->with('error', 'This user already has an Eternal Bond.');
-        }
-
-        // Check if invitation already exists
-        $existingConnection = Connection::where(function ($query) use ($currentUser, $receiver) {
-            $query->where('sender_id', $currentUser->id)
-                  ->where('receiver_id', $receiver->id);
-        })->orWhere(function ($query) use ($currentUser, $receiver) {
-            $query->where('sender_id', $receiver->id)
-                  ->where('receiver_id', $currentUser->id);
-        })->first();
-
-        if ($existingConnection) {
-            return redirect()->back()->with('error', 'A connection already exists with this user.');
-        }
-
-        // Create the heart invitation
-        Connection::create([
-            'sender_id' => $currentUser->id,
-            'receiver_id' => $receiver->id,
-            'status' => 'pending',
-        ]);
-
-        return redirect()->back()->with('success', 'Heart Invitation sent successfully!');
-    }
+    
 
     /**
      * Accept a heart invitation

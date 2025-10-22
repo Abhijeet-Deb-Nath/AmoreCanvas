@@ -279,6 +279,122 @@
         form {
             display: inline;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .dream-header {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .dream-header h1 {
+                font-size: 28px;
+            }
+
+            .dream-header h2 {
+                font-size: 18px;
+            }
+
+            .dream-tag {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+
+            .dream-detail .label {
+                font-size: 14px;
+            }
+
+            .dream-detail .content {
+                font-size: 15px;
+            }
+
+            .dream-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .nav-buttons a {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .negotiations-section {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .negotiations-section h3 {
+                font-size: 24px;
+            }
+
+            .negotiation-item {
+                padding: 15px;
+            }
+
+            .negotiation-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .negotiation-date {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .dream-header {
+                padding: 20px 15px;
+            }
+
+            .dream-header h1 {
+                font-size: 24px;
+            }
+
+            .dream-header h2 {
+                font-size: 16px;
+            }
+
+            .dream-tag {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+
+            .dream-detail .content {
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 11px 18px;
+                font-size: 13px;
+            }
+
+            .negotiations-section {
+                padding: 20px 15px;
+            }
+
+            .negotiations-section h3 {
+                font-size: 22px;
+            }
+
+            .negotiation-item {
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>

@@ -328,6 +328,172 @@
             font-style: italic;
             font-size: 14px;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 25px;
+                flex-wrap: wrap;
+            }
+
+            .navbar h1 {
+                font-size: 24px;
+            }
+
+            .navbar-right {
+                gap: 12px;
+            }
+
+            .user-name {
+                font-size: 14px;
+            }
+
+            .logout-btn {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 0 25px;
+                margin: 35px auto;
+            }
+
+            .welcome-card {
+                padding: 45px 30px;
+            }
+
+            .welcome-card h2 {
+                font-size: 36px;
+            }
+
+            .welcome-card p {
+                font-size: 16px;
+            }
+
+            .heart-icon {
+                font-size: 50px;
+            }
+
+            .personal-space-note {
+                padding: 20px;
+                font-size: 15px;
+            }
+
+            .invite-card,
+            .bond-request-card {
+                padding: 30px 25px;
+            }
+
+            .invite-card h3,
+            .bond-request-card h3 {
+                font-size: 26px;
+            }
+
+            .invite-card p,
+            .bond-request-card p {
+                font-size: 15px;
+            }
+
+            .form-group input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 20px;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .user-name {
+                font-size: 13px;
+            }
+
+            .logout-btn {
+                padding: 7px 14px;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 0 15px;
+                margin: 25px auto;
+            }
+
+            .welcome-card {
+                padding: 35px 25px;
+            }
+
+            .welcome-card h2 {
+                font-size: 32px;
+            }
+
+            .welcome-card p {
+                font-size: 15px;
+            }
+
+            .heart-icon {
+                font-size: 45px;
+                margin: 25px 0;
+            }
+
+            .personal-space-note {
+                padding: 18px;
+                font-size: 14px;
+            }
+
+            .invite-card,
+            .bond-request-card {
+                padding: 25px 20px;
+            }
+
+            .invite-card h3,
+            .bond-request-card h3 {
+                font-size: 24px;
+            }
+
+            .invite-card p,
+            .bond-request-card p {
+                font-size: 14px;
+            }
+
+            .form-group input {
+                padding: 9px;
+                font-size: 13px;
+            }
+
+            .btn {
+                padding: 9px 18px;
+                font-size: 13px;
+            }
+
+            .declined-message {
+                padding: 18px;
+            }
+
+            .declined-message p {
+                font-size: 15px;
+            }
+
+            .try-again-text {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>

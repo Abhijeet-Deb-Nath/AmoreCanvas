@@ -31,7 +31,6 @@ Route::middleware('auth')->group(function () {
     
     // Connection Routes
     Route::post('/send-invitation-email', [ConnectionController::class, 'sendInvitationByEmail'])->name('send.invitation.email');
-    Route::post('/send-invitation/{user}', [ConnectionController::class, 'sendInvitation'])->name('send.invitation');
     Route::post('/accept-invitation/{connection}', [ConnectionController::class, 'acceptInvitation'])->name('accept.invitation');
     Route::post('/decline-invitation/{connection}', [ConnectionController::class, 'declineInvitation'])->name('decline.invitation');
     

@@ -222,6 +222,113 @@
             color: #e91e63;
             font-weight: bold;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .navbar h1 {
+                font-size: 22px;
+            }
+
+            .back-btn {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .form-card h2 {
+                font-size: 24px;
+            }
+
+            .form-card p {
+                font-size: 14px;
+            }
+
+            .form-group label {
+                font-size: 15px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .media-type-options {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .media-type-icon {
+                font-size: 28px;
+            }
+
+            .submit-btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h1 {
+                font-size: 20px;
+            }
+
+            .back-btn {
+                font-size: 12px;
+                padding: 7px 14px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .form-card {
+                padding: 20px 15px;
+            }
+
+            .form-card h2 {
+                font-size: 22px;
+            }
+
+            .form-group label {
+                font-size: 14px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 9px;
+                font-size: 13px;
+            }
+
+            .media-type-options {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .media-type-option {
+                padding: 12px;
+            }
+
+            .submit-btn {
+                padding: 11px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
